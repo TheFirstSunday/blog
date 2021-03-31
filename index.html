@@ -5,9 +5,34 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vite App</title>
+  <link rel="stylesheet" href="/src/assets/style/reset.css">
+  <script type=text/javascript src=/src/assets/live2dw/lib/L2Dwidget.min.js></script>
 </head>
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
+  <script src="/src/assets/js/ribbonsEffect.js"></script>
+  <script>
+    window.L2Dwidget.init({
+      pluginRootPath: "assets/live2dw/",
+      pluginJsPath: "lib/",
+      pluginModelPath: `live2d-widget-model-shizuku/assets/`,
+      tagMode: false,
+      debug: false,
+      model: {
+        jsonPath: `/src/assets/live2dw/live2d-widget-model-shizuku/assets/shizuku.model.json`
+      },
+      display: {
+        position: "right",
+        width: 220,
+        height: 400,
+        hOffset: 30,
+        vOffset: -45
+      },
+      react: { opacity: 0.7 },
+      mobile: { show: true },
+      log: false
+    });
+  </script>
 </body>
 </html>
