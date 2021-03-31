@@ -2270,6 +2270,13 @@ koa@^2.13.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
+less-loader@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.npm.taobao.org/less-loader/download/less-loader-8.0.0.tgz#cd7f10e3c13ca8f71244a11ee396405ae3ce9c82"
+  integrity sha1-zX8Q48E8qPcSRKEe45ZAWuPOnII=
+  dependencies:
+    klona "^2.0.4"
+
 less@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npm.taobao.org/less/download/less-4.1.1.tgz#15bf253a9939791dc690888c3ff424f3e6c7edba"
