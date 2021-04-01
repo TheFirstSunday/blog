@@ -1,6 +1,7 @@
 import path from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import styleImport from 'vite-plugin-style-import'
 
 export default defineConfig(({ mode }) => ({
   /**
@@ -8,7 +9,22 @@ export default defineConfig(({ mode }) => ({
    * @default '/'
    */
   base: loadEnv(mode, process.cwd()).VITE_BASE_URL,
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    styleImport({
+      libs: [
+        {
+          libraryName: 'element-plus',
+          resolveStyle: (name) => {
+            return `element-plus/lib/theme-chalk/${name}.css`
+          },
+          resolveComponent: (name) => {
+            return `element-plus/lib/${name}`
+          }
+        }
+      ]
+    })
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
