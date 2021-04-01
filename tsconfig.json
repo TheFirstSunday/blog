@@ -22,13 +22,13 @@
     // 指定ECMAScript目标版本
     "target": "esnext",
     // 要包含的类型声明文件名列表
-    "types": [],
+    "types": ["vite/client"],
     "isolatedModules": true,
     // 模块名到基于 baseUrl的路径映射的列表。
     "paths": {
       "@/*": [
         "src/*"
-      ],
+      ]
     },
     // 编译过程中需要引入的库文件的列表。
     "lib": [

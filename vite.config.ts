@@ -1,58 +1,55 @@
-const fs = require('fs')
-const path = require('path')
+import path from 'path'
+import { defineConfig, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-// Dotenv 是一个零依赖的模块，它能将环境变量中的变量从 .env 文件加载到 process.env 中
-const dotenv = require('dotenv')
-
-const envFiles = [/** default file */ '.env', /** mode file */ `.env.${process.env.NODE_ENV}`]
-
-for (const file of envFiles) {
-  const envConfig = dotenv.parse(fs.readFileSync(file))
-  for (const k in envConfig) {
-    process.env[k] = envConfig[k]
-  }
-}
-
-module.exports = {
-  alias: {
-    '/@/': path.resolve(__dirname, './src')
-  },
-  optimizeDeps: {
-    include: ['echarts']
-  },
-  hostname: process.env.VITE_HOST,
-  port: process.env.VITE_PORT,
-  // 引用全局 scss
-  cssPreprocessOptions: {
-    less: {
-      additionalData: '@import "./src/assets/style/index.less";'
-    }
-  },
-  // 压缩
-  minify: 'esbuild',
-  // 是否自动在浏览器打开
-  open: false,
-  // 是否开启 https
-  https: false,
-  // 服务端渲染
-  ssr: false,
+export default defineConfig(({ mode }) => ({
   /**
    * Base public path when served in production.
    * @default '/'
    */
-  base: process.env.VITE_BASE_URL,
-  /**
-   * Directory relative from `root` where build output will be placed. If the
-   * directory exists, it will be removed before the build.
-   * @default 'dist'
-   */
-  outDir: process.env.VITE_OUTPUT_DIR,
-  // 反向代理
-  proxy: {
-    api: {
-      target: 'http://www.skillnull.com',
-      changeOrigin: true,
-      rewrite: (path: string) => path.replace(/^\/api/, '')
+  base: loadEnv(mode, process.cwd()).VITE_BASE_URL,
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  },
+  optimizeDeps: {
+    // include: ['echarts']
+  },
+  server: {
+    host: process.env.VITE_HOST,
+    port: Number(process.env.VITE_PORT),
+    // 是否自动在浏览器打开
+    open: false,
+    // 是否开启 https
+    https: false,
+    // 反向代理
+    proxy: {
+      api: {
+        target: 'http://www.skillnull.com',
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/api/, '')
+      }
+    }
+  },
+  build: {
+    // 压缩
+    minify: 'esbuild',
+    /**
+     * Directory relative from `root` where build output will be placed. If the
+     * directory exists, it will be removed before the build.
+     * @default 'dist'
+     */
+    outDir: process.env.VITE_OUTPUT_DIR,
+    polyfillDynamicImport: true
+  },
+  // 引用全局 scss
+  css: {
+    preprocessorOptions: {
+      less: {
+        additionalData: '@import "./src/assets/style/index.css";'
+      }
     }
   }
-}
+}))
