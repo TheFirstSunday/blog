@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => ({
     // 反向代理
     proxy: {
       api: {
-        target: 'http://www.skillnull.com',
+        target: 'http://www.baidu.com',
         changeOrigin: true,
         rewrite: (path: string) => path.replace(/^\/api/, '')
       }
