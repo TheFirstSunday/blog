@@ -60,7 +60,7 @@ export default defineConfig(({ mode }) => ({
     outDir: process.env.VITE_OUTPUT_DIR,
     polyfillDynamicImport: true
   },
-  // 引用全局 scss
+  // 引用全局 less
   css: {
     preprocessorOptions: {
       less: {

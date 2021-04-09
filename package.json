@@ -15,7 +15,7 @@
     "npm": ">= 6.0.0"
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint",
+    "*.{js, ts, vue}": "eslint",
     "**/*.less": "stylelint --syntax less"
   },
   "dependencies": {
