@@ -3,7 +3,7 @@ import * as qs from 'qs'
 import { ElMessage } from 'element-plus'
 
 export const baseURL =
-  process.env.NODE_ENV == 'production' ? 'https://xxx.xxx.com' : 'http://xxx.dev.xxx.com'
+  process.env.NODE_ENV === 'production' ? 'https://xxx.xxx.com' : 'http://xxx.dev.xxx.com'
 
 // 创建一个独立的axios实例
 const service = axios.create({
@@ -24,7 +24,7 @@ service.interceptors.request.use(
   (config) => {
     if (
       (config.method === 'post' || config.method === 'put') &&
-      config.headers['Content-Type'] == 'application/x-www-form-urlencoded;charset=UTF-8'
+      config.headers['Content-Type'] === 'application/x-www-form-urlencoded;charset=UTF-8'
     ) {
       config.data = qs.stringify(config.data)
     }
